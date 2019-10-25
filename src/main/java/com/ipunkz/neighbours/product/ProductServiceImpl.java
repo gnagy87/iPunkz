@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -26,7 +27,9 @@ public class ProductServiceImpl implements ProductService{
   }
 
   @Override
-  public List<Product> listProductBykeyWord(String search) {
-    return productRepository.findAllByShortDescriptionContaining(search);
+  public List<Product> listProductByKeyWord(String search) {
+    List<Product> products = productRepository.findAll();
+    return products.stream().filter(x -> x.getShortDescription().contains(search.toLowerCase())
+    || x.getName().contains(search.toLowerCase())).collect(Collectors.toList());
   }
 }
