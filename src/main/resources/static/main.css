@@ -97,10 +97,18 @@ h3 {
 }
 
 .buttonC {
-    display: flex;
+    display: inline-block;
+    text-align: center;
 }
 
 .uploadbutton:hover {
     opacity: 0.8;
+}
+
+p {
+    font-family: "Arial Black";
+    color: white;
+    text-shadow: 2px 2px black;
+    margin-left: 20px;
 }
 

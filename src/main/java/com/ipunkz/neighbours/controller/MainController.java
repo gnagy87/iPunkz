@@ -1,7 +1,6 @@
 package com.ipunkz.neighbours.controller;
 
 import com.ipunkz.neighbours.exceptions.UserException;
-import com.ipunkz.neighbours.product.Product;
 import com.ipunkz.neighbours.product.ProductService;
 import com.ipunkz.neighbours.user.AppUser;
 import com.ipunkz.neighbours.user.AppUserService;
