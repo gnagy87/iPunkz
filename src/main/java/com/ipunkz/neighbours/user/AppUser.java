@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -28,5 +29,6 @@ public class AppUser {
     this.nickname = nickname;
     this.password = password;
     this.pictureName = "/pics/nyugdijas.png";
+    this.products = new ArrayList<>();
   }
 }
