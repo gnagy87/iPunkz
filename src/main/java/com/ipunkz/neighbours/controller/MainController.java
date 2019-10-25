@@ -1,5 +1,6 @@
 package com.ipunkz.neighbours.controller;
 
+import com.ipunkz.neighbours.exceptions.UserException;
 import com.ipunkz.neighbours.product.ProductRepository;
 import com.ipunkz.neighbours.user.AppUser;
 import com.ipunkz.neighbours.user.AppUserService;
@@ -36,6 +37,17 @@ public class MainController {
       return "redirect:/main" + user.getId();
     } catch (Exception e) {
       model.addAttribute("error",e.getMessage());
+      return "index";
+    }
+  }
+
+  @PostMapping("/login")
+  public String loginUser(Model model, @RequestParam(value = "uname", required = false) String username,
+                          @RequestParam(value = "psw", required = false) String password) {
+    try {
+      return "redirect:/main" + appUserService.passwordCheck(username, password).getId();
+    } catch (UserException err) {
+      model.addAttribute("error", err.getMessage());
       return "index";
     }
   }
