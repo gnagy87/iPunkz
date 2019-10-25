@@ -34,7 +34,7 @@ public class MainController {
                          @RequestParam (name = "password2") String password2, Model model){
     try {
       AppUser user = appUserService.register(nickname,password,password2);
-      return "redirect:/main" + user.getId();
+      return "redirect:/main/?id=" + user.getId();
     } catch (Exception e) {
       model.addAttribute("error",e.getMessage());
       return "index";
@@ -45,7 +45,7 @@ public class MainController {
   public String loginUser(Model model, @RequestParam(value = "uname", required = false) String username,
                           @RequestParam(value = "psw", required = false) String password) {
     try {
-      return "redirect:/main" + appUserService.passwordCheck(username, password).getId();
+      return "redirect:/main/?id=" + appUserService.passwordCheck(username, password).getId();
     } catch (UserException err) {
       model.addAttribute("error", err.getMessage());
       return "index";
@@ -53,7 +53,8 @@ public class MainController {
   }
 
   @GetMapping("/main")
-  public String renderMainPage(){
+  public String renderMainPage(@RequestParam (value = "id") Long userId, Model model){
+    model.addAttribute("user", appUserService.findById(userId));
     return "main";
   }
 }

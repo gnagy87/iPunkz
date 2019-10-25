@@ -19,10 +19,16 @@ public class AppUserServiceImpl implements AppUserService {
   @Override
   public AppUser passwordCheck(String username, String password) throws UserException {
     Optional<AppUser> user = appUserRepository.findAppUserByNickname(username);
-    if (user.get().getPassword().equals(password) && user.isPresent()){
+    user.orElseThrow(() -> new UserException("User does not exist!"));
+    if (user.get().getPassword().equals(password)){
       return user.get();
     }
-    throw new UserException("Password or username is not correct");
+    throw new UserException("Password is not correct");
+  }
+
+  @Override
+  public AppUser findById(Long userId) {
+    return appUserRepository.findAppUserById(userId);
   }
 
   @Override
