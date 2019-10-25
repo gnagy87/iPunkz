@@ -32,6 +32,11 @@ public class AppUserServiceImpl implements AppUserService {
   }
 
   @Override
+  public void saveAppUser(AppUser user) {
+    appUserRepository.save(user);
+  }
+
+  @Override
   public AppUser register(String nickname, String password, String password2) throws Exception {
     if (isNameOccupied(nickname)) {
       throw new Exception("Username is already taken");

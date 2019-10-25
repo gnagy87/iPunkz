@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -15,7 +16,7 @@ import java.util.List;
 public class AppUser {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String nickname;
   private String password;
@@ -27,5 +28,6 @@ public class AppUser {
   public AppUser(String nickname, String password) {
     this.nickname = nickname;
     this.password = password;
+    this.products = new ArrayList<>();
   }
 }

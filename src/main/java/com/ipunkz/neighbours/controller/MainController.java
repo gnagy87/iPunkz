@@ -1,13 +1,14 @@
 package com.ipunkz.neighbours.controller;
 
 import com.ipunkz.neighbours.exceptions.UserException;
-import com.ipunkz.neighbours.product.ProductRepository;
+import com.ipunkz.neighbours.product.ProductService;
 import com.ipunkz.neighbours.user.AppUser;
 import com.ipunkz.neighbours.user.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
 
   private AppUserService appUserService;
-  private ProductRepository productRepository;
+  private ProductService productService;
 
   @Autowired
-  public MainController(AppUserService appUserService, ProductRepository productRepository) {
+  public MainController(AppUserService appUserService, ProductService productService) {
     this.appUserService = appUserService;
-    this.productRepository = productRepository;
+    this.productService = productService;
   }
 
   @GetMapping("/")
@@ -56,5 +57,16 @@ public class MainController {
   public String renderMainPage(@RequestParam (value = "id") Long userId, Model model){
     model.addAttribute("user", appUserService.findById(userId));
     return "main";
+  }
+
+  @GetMapping("/auction/{id}")
+  public String renderAuctionPage(@PathVariable(value = "id") Long userId, @RequestParam (value = "search", required = false) String search, Model model) {
+    model.addAttribute("userId", userId);
+    if (search != null) {
+      model.addAttribute("products", productService.listProductBykeyWord(search));
+      return "auction";
+    }
+    model.addAttribute("products", productService.listAllProducts());
+    return "auction";
   }
 }
