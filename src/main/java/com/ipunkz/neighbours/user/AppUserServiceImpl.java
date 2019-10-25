@@ -32,6 +32,14 @@ public class AppUserServiceImpl implements AppUserService {
   }
 
   @Override
+  public AppUser setProfileImg(Long id, String picturesPath) {
+    AppUser appUser = findById(id);
+    appUser.setPictureName(picturesPath);
+    appUserRepository.save(appUser);
+    return appUser;
+  }
+
+  @Override
   public void saveAppUser(AppUser user) {
     appUserRepository.save(user);
   }

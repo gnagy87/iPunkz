@@ -16,7 +16,7 @@ import java.util.List;
 public class AppUser {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String nickname;
   private String password;
@@ -28,6 +28,7 @@ public class AppUser {
   public AppUser(String nickname, String password) {
     this.nickname = nickname;
     this.password = password;
+    this.pictureName = "/pics/nyugdijas.png";
     this.products = new ArrayList<>();
   }
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Neighbours Home Page</title>
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/main.css">
+    </head>
+    <body>
+        <div>
+            <h2 th:text="'Hello ' + ${user.getNickname()} + '! Want you beszállni az internetbe with Vágási Feri?'"></h2>
+        </div>
+        <div class="center">
+            <div class="user">
+                <h3>User details:</h3>
+                <div>
+                    <img class="picture" th:src="${user.pictureName}">
+                </div>
+                <div class="buttonC">
+                    <button onclick="document.getElementById('id01').style.display='block'" class="uploadbutton">Upload photo</button>
+                </div>
+            </div>
+            <h1>Neighbours Bidding Page</h1>
+            <a class="button" th:href="'/auction/' + ${user.id}" role="button">GO TO THE AUCTION PAGE</a>
+        </div>
+    <div id="id01" class="modal">
+
+        <form class="modal-content animate" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="/pics/logo.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="upload"><b>Image</b></label>
+                <input type="file" name="upload">
+                <input type="hidden" name="userid" th:value="${user.id}">
+                <button type="submit" value="uploadFile">Upload</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        var modal = document.getElementById('id01');
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    </body>
+</html>
