@@ -12,12 +12,6 @@
 <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Register</button>
 <p th:text="${error}"></p>
 
-<form action="upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="upload">
-    <input type="submit" value="uploadFile">
-</form>
-<img th:src="${img}">
-
 <div id="id01" class="modal">
 
     <form class="modal-content animate" action="/login" method="post">
