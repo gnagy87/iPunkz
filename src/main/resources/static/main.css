@@ -55,7 +55,7 @@ h1 {
 .user {
     position: relative;
     margin-left: 30px;
-    height: 450px;
+    height: 500px;
     width: 300px;
     margin-top: 50px;
     background-image: url("/pics/padlo.jpg");
@@ -105,10 +105,11 @@ h3 {
     opacity: 0.8;
 }
 
-p {
+p, li {
     font-family: "Arial Black";
     color: white;
     text-shadow: 2px 2px black;
     margin-left: 20px;
 }
+
 
