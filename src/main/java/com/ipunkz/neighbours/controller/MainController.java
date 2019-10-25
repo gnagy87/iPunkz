@@ -51,7 +51,8 @@ public class MainController {
   public String loginUser(Model model, @RequestParam(value = "uname", required = false) String username,
                           @RequestParam(value = "psw", required = false) String password) {
     try {
-      return "redirect:/main/?id=" + appUserService.passwordCheck(username, password).getId();
+      model.addAttribute("user", appUserService.passwordCheck(username, password));
+      return "home";
     } catch (UserException err) {
       model.addAttribute("error", err.getMessage());
       return "index";
