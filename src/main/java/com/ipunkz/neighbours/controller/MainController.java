@@ -1,7 +1,9 @@
 package com.ipunkz.neighbours.controller;
 
 import com.ipunkz.neighbours.exceptions.UserException;
+import com.ipunkz.neighbours.product.Product;
 import com.ipunkz.neighbours.product.ProductService;
+import com.ipunkz.neighbours.upload.UploadHandler;
 import com.ipunkz.neighbours.user.AppUser;
 import com.ipunkz.neighbours.user.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +13,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MainController {
 
   private AppUserService appUserService;
   private ProductService productService;
+  private UploadHandler uploadHandler;
 
   @Autowired
-  public MainController(AppUserService appUserService, ProductService productService) {
+  public MainController(AppUserService appUserService, ProductService productService, UploadHandler uploadHandler) {
     this.appUserService = appUserService;
     this.productService = productService;
+    this.uploadHandler = uploadHandler;
   }
 
   @GetMapping("/")
@@ -68,5 +73,17 @@ public class MainController {
     }
     model.addAttribute("products", productService.listAllProducts());
     return "auction";
+  }
+
+  @PostMapping("/addProduct")
+  public String addNewProduct(@RequestParam("name") String name, @RequestParam("long") String lDesc,
+                              @RequestParam("short") String sDesc, @RequestParam("price") int price,
+                              @RequestParam("limit") int bidLimit, @RequestParam("expire") int expire,
+                              @RequestParam("upload")MultipartFile file, @RequestParam("userid") long id, Model model) {
+
+    Product product = new Product(name, lDesc, sDesc, price, bidLimit, expire, uploadHandler.savePics(file));
+    productService.addNewProduct(product, id);
+    model.addAttribute("user", appUserService.findById(id));
+    return "home";
   }
 }
