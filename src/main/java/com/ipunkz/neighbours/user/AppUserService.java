@@ -11,5 +11,7 @@ public interface AppUserService {
 
   AppUser findById(Long userId);
 
+  AppUser setProfileImg(Long id, String picturesPath);
+
   void saveAppUser(AppUser user);
 }

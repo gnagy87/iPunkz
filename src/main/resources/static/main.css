@@ -75,7 +75,6 @@ h3 {
 .picture {
     margin-left: 100px;
     margin-right: 40px;
-    content: url("pics/nyugdijas.png");
     width: 100px;
     height: 100px;
     border-radius: 50px;
@@ -83,7 +82,7 @@ h3 {
 }
 
 .uploadbutton {
-    margin-left: 90px;
+    margin: auto;
     margin-top: 20px;
     background-color: #a61210;
     border: none;
@@ -91,9 +90,14 @@ h3 {
     padding: 11px 25px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    justify-self: center;
     border-radius: 50px;
     cursor: pointer;
+    width: auto;
+}
+
+.buttonC {
+    display: flex;
 }
 
 .uploadbutton:hover {
