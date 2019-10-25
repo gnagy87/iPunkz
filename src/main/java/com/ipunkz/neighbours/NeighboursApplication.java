@@ -1,6 +1,5 @@
 package com.ipunkz.neighbours;
 
-import com.ipunkz.neighbours.controller.UploadController;
 import com.ipunkz.neighbours.upload.UploadHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -68,7 +68,7 @@ public class MainController {
   public String renderAuctionPage(@PathVariable(value = "id") Long userId, @RequestParam (value = "search", required = false) String search, Model model) {
     model.addAttribute("userId", userId);
     if (search != null) {
-      model.addAttribute("products", productService.listProductBykeyWord(search));
+      model.addAttribute("products", productService.listProductByKeyWord(search));
       return "auction";
     }
     model.addAttribute("products", productService.listAllProducts());
