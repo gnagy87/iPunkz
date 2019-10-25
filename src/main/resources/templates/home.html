@@ -22,7 +22,9 @@
                 </div>
                 <div>
                     <p th:text="'Username: ' + ${user.getNickname()}"></p>
-                    <p th:text="'Your products: ' + ${user.getProducts()}"></p>
+                    <ul th:each="product : ${user.getProducts()}">
+                        <li th:text="${product.getName()}"></li>
+                    </ul>
                 </div>
             </div>
             <h1>Neighbours Bidding Page</h1>
