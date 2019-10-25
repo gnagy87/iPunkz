@@ -1,5 +1,6 @@
 package com.ipunkz.neighbours.product;
 
+import com.ipunkz.neighbours.user.AppUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,14 +17,22 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String name;
-  private String description;
-  private int quantity;
+  private String longDescription;
+  private String shortDescription;
   private int price;
+  private int bidLimit;
+  private String owner;
+  private String picturesName;
 
-  public Product(String name, String description, int quantity, int price) {
+  @ManyToOne
+  private AppUser user;
+
+  public Product(String name, String longDescription, String shortDescription, int price, int bidLimit) {
     this.name = name;
-    this.description = description;
-    this.quantity = quantity;
+    this.longDescription = longDescription;
+    this.shortDescription = shortDescription;
     this.price = price;
+    this.bidLimit = bidLimit;
+    this.owner = null;
   }
 }
