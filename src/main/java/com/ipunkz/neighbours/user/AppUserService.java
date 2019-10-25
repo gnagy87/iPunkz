@@ -10,4 +10,6 @@ public interface AppUserService {
   AppUser passwordCheck(String username, String password) throws UserException;
 
   AppUser findById(Long userId);
+
+  AppUser setProfileImg(Long id, String picturesPath);
 }

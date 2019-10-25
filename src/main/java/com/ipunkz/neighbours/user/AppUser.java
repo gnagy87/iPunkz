@@ -27,5 +27,6 @@ public class AppUser {
   public AppUser(String nickname, String password) {
     this.nickname = nickname;
     this.password = password;
+    this.pictureName = "/pics/nyugdijas.png";
   }
 }

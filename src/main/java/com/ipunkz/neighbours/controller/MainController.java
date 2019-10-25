@@ -55,6 +55,6 @@ public class MainController {
   @GetMapping("/main")
   public String renderMainPage(@RequestParam (value = "id") Long userId, Model model){
     model.addAttribute("user", appUserService.findById(userId));
-    return "main";
+    return "home";
   }
 }

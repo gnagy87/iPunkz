@@ -32,6 +32,14 @@ public class AppUserServiceImpl implements AppUserService {
   }
 
   @Override
+  public AppUser setProfileImg(Long id, String picturesPath) {
+    AppUser appUser = findById(id);
+    appUser.setPictureName(picturesPath);
+    appUserRepository.save(appUser);
+    return appUser;
+  }
+
+  @Override
   public AppUser register(String nickname, String password, String password2) throws Exception {
     if (isNameOccupied(nickname)) {
       throw new Exception("Username is already taken");
