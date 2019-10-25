@@ -31,6 +31,7 @@ public class UploadController {
   @PostMapping("/upload")
   public String uploading(Model model, @RequestParam("userid") Long id, @RequestParam("upload")MultipartFile file) {
     appUserService.setProfileImg(id, uploadHandler.savePics(file));
-    return "redirect:/main/?id=" + id;
+    model.addAttribute("user", appUserService.findById(id));
+    return "home";
   }
 }

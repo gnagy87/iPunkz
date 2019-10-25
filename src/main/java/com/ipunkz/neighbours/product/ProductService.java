@@ -6,4 +6,5 @@ public interface ProductService {
   void saveProduct(Product product);
   List<Product> listAllProducts();
   List<Product> listProductBykeyWord(String search);
+  void addNewProduct(Product product, Long id);
 }
