@@ -17,7 +17,15 @@
                     <img class="picture" th:src="${user.pictureName}">
                 </div>
                 <div class="buttonC">
-                    <button onclick="document.getElementById('id01').style.display='block'" class="uploadbutton">Upload photo</button>
+                    <button onclick="document.getElementById('id01').style.display='block'" class="uploadbutton">Choose Profile Picture</button>
+                    <button onclick="document.getElementById('id02').style.display='block'" class="uploadbutton">Add products</button>
+                </div>
+                <div>
+                    <p th:text="'Username: ' + ${user.getNickname()}"></p>
+                    <p>Your products:</p>
+                    <ul th:each="product : ${user.getProducts()}">
+                        <li th:text="${product.getName()}"></li>
+                    </ul>
                 </div>
             </div>
             <h1>Neighbours Bidding Page</h1>
@@ -39,12 +47,45 @@
             </div>
         </form>
     </div>
+        <div id="id02" class="modal">
+
+            <form class="modal-content animate" action="/addProduct" method="post" enctype="multipart/form-data">
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <img src="/pics/logo.png" alt="Avatar" class="avatar">
+                </div>
+
+                <div class="container">
+                    <label for="name"><b>Name:</b></label>
+                    <input type="text" name="name">
+                    <label for="long"><b>Long Description:</b></label>
+                    <input type="text" name="long">
+                    <label for="short"><b>Short Description:</b></label>
+                    <input type="text" name="short">
+                    <label for="price"><b>Price:</b></label>
+                    <input type="number" name="price">
+                    <label for="limit"><b>Bid Limit:</b></label>
+                    <input type="number" name="limit">
+                    <label for="expire"><b>Expire:</b></label>
+                    <input type="range" name="expire" min="3" max="30">
+                    <label for="upload"><b>Upload picture:</b></label>
+                    <input type="file" name="upload">
+                    <input type="hidden" name="userid" th:value="${user.id}">
+                    <button type="submit" value="uploadFile">Upload</button>
+                </div>
+            </form>
+        </div>
     <script>
         var modal = document.getElementById('id01');
+        var modal2 = document.getElementById('id02');
 
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+            }
+
+            if (event.target == modal2) {
+                    modal2.style.display = "none";
             }
         }
     </script>
