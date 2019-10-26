@@ -67,7 +67,8 @@
                     <label for="limit"><b>Bid Limit:</b></label>
                     <input type="number" name="limit">
                     <label for="expire"><b>Expire:</b></label>
-                    <input type="range" name="expire" min="3" max="30">
+                    <input type="range" name="expire" min="3" max="30" oninput="this.form.expireInput.value=this.value">
+                    <input type="number" name="expireInput" min="3" max="30" oninput="this.form.expire.value=this.value">
                     <label for="upload"><b>Upload picture:</b></label>
                     <input type="file" name="upload">
                     <input type="hidden" name="userid" th:value="${user.id}">
@@ -85,7 +86,7 @@
             }
 
             if (event.target == modal2) {
-                    modal2.style.display = "none";
+                modal2.style.display = "none";
             }
         }
     </script>
