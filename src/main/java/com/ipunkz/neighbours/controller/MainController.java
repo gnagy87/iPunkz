@@ -96,6 +96,7 @@ public class MainController {
       product.setExpired(true);
       productService.saveProduct(product);
       model.addAttribute("product", product);
+      model.addAttribute("userId", userId);
       return "product";
     }
     try {

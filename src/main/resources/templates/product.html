@@ -31,7 +31,8 @@
 </form>
 
 <div class="list">
-    <ul th:value="${product}">
+    <span th:if="${product.isExpired() == true}">Auction is over!</span>
+    <ul th:unless="${product.isExpired() == true}" th:value="${product}">
         <li th:text="'Name: ' + ${product.getName()}"></li>
         <li th:text="'Short description: ' + ${product.getShortDescription()}"></li>
         <li th:text="'Long description: ' + ${product.getLongDescription()}"></li>
