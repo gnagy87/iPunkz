@@ -22,7 +22,6 @@
                 </div>
                 <div>
                     <p th:text="'Username: ' + ${user.getNickname()}"></p>
-                    <p>Your products:</p>
                     <ul th:each="product : ${user.getProducts()}">
                         <li th:text="${product.getName()}"></li>
                     </ul>
