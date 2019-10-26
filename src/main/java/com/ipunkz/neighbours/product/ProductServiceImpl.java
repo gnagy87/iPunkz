@@ -45,6 +45,13 @@ public class ProductServiceImpl implements ProductService{
   }
 
   @Override
+  public List<Product> filterProducts(String username) {
+    List<Product> products = productRepository.findAll();
+    return products.stream().filter(x -> x.getOwner().equals(username) &&
+            x.isExpired()).collect(Collectors.toList());
+  }
+
+  @Override
   public Product findById(Long productId) {
     return productRepository.findById(productId).get();
   }

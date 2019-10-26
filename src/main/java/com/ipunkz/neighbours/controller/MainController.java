@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -118,5 +119,16 @@ public class MainController {
     productService.addNewProduct(product, id);
     model.addAttribute("user", appUserService.findById(id));
     return "home";
+  }
+
+  @GetMapping("/shippingcart")
+  public String shippingCart(@RequestParam (value = "id") Long userId, Model model){
+    AppUser user = appUserService.findById(userId);
+    List<Product> filteredProducts = productService.filterProducts(user.getNickname());
+    model.addAttribute("userId", userId);
+    model.addAttribute("user", user);
+    model.addAttribute("filteredProducts",filteredProducts);
+
+    return "shippingcart";
   }
 }
