@@ -19,7 +19,7 @@
 </nav>
 
 <div class="user">
-    <img class="picture" th:src="'/pics/' + ${product.getPicturesName()}">
+    <img class="picture" th:src="${product.getPicturesName()}">
 </div>
 
 <form class="bid" th:action="'/product/' + ${product.getId()} + '/?userId=' + ${userId}" method="post">
