@@ -10,8 +10,7 @@
 <nav class="navbar">
     <a class="navbar-brand">Neighbours auction</a>
     <a class="navbar-brand" th:href="'/main/?id=' + ${userId}" style="color: white">Profile</a>
-    <a class="navbar-brand" href="" style="color: white">My products</a>
-    <a class="navbar-brand" href="" style="color:white">Shopping cart</a>
+    <a class="navbar-brand" th:href="'/shippingcart/?id=' + ${userId}" style="color:white">Shopping cart</a>
     <a class="navbar-brand" href="/" style="color:white">Logout</a>
     <form class="form-inline" th:action="'/auction/' + ${userId}" method="get">
         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
