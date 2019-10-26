@@ -1,7 +1,6 @@
 package com.ipunkz.neighbours.controller;
 
 import com.ipunkz.neighbours.exceptions.UserException;
-import com.ipunkz.neighbours.product.Product;
 import com.ipunkz.neighbours.product.ProductService;
 import com.ipunkz.neighbours.user.AppUser;
 import com.ipunkz.neighbours.user.AppUserService;
@@ -23,20 +22,6 @@ public class MainController {
   public MainController(AppUserService appUserService, ProductService productService) {
     this.appUserService = appUserService;
     this.productService = productService;
-    AppUser admin = new AppUser("admin","12345");
-    appUserService.saveAppUser(admin);
-    Product product = new Product("vágási feri","feriferiferi","take him tonite",10000,20000);
-    product.setUser(admin);
-    Product product1 = new Product("janka néni", "jankanénijankanénijankanéni", "get drunk with her", 5000,1000);
-    product1.setUser(admin);
-    Product product2 = new Product("taki bácsi", "takibátakibátakibá","take a ride with him", 7000,12000);
-    product2.setUser(admin);
-    Product product3 = new Product("etus", "etusetusetusetus", "gossip with her", 6500, 9000);
-    product3.setUser(admin);
-    productService.saveProduct(product);
-    productService.saveProduct(product1);
-    productService.saveProduct(product2);
-    productService.saveProduct(product3);
   }
 
   @GetMapping("/")
@@ -85,8 +70,26 @@ public class MainController {
     return "auction";
   }
 
-  @GetMapping("product/{id}")
-  public String detailsOfProduct(@PathVariable (value = "id") Long productId, Model model) {
+  @GetMapping("/product/{productId}")
+  public String detailsOfProduct(@PathVariable (value = "productId") Long productId,
+                                 @RequestParam (value = "userId") Long userId, Model model) {
+    model.addAttribute("userId", userId);
+    model.addAttribute("product", productService.findById(productId));
+    return "product";
+  }
 
+  @PostMapping("/product/{productId}")
+  public String makeBid(@RequestParam (value = "bid") String bid,
+                        @RequestParam (value = "userId") Long userId,
+                        @PathVariable (value = "productId") Long productId, Model model) {
+    try {
+      AppUser user = appUserService.findById(userId);
+      productService.auction(productId,user,bid);
+    } catch (Exception e) {
+      model.addAttribute("error",e.getMessage());
+    }
+    model.addAttribute("userId", userId);
+    model.addAttribute("product", productService.findById(productId));
+    return "product";
   }
 }

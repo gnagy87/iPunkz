@@ -34,7 +34,7 @@
     <tbody>
     <tr th:each="product : ${products}">
         <td th:text="${product.getId()}"></td>
-        <td><a href="" style="color: white" th:text="${product.getName()}"></a></td>
+        <td><a th:href="'/product/' + ${product.getId()} + '/?userId=' + ${userId}" style="color: white" th:text="${product.getName()}"></a></td>
         <td th:text="${product.getShortDescription()}"></td>
         <td th:text="${product.getPrice()} + ',- HUF'"></td>
         <td th:text="${product.getBidLimit() + ',- HUF'}"></td>
