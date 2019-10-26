@@ -3,6 +3,7 @@ package com.ipunkz.neighbours.controller;
 import com.ipunkz.neighbours.exceptions.UserException;
 import com.ipunkz.neighbours.product.Product;
 import com.ipunkz.neighbours.product.ProductService;
+import com.ipunkz.neighbours.time.TimeService;
 import com.ipunkz.neighbours.upload.UploadHandler;
 import com.ipunkz.neighbours.user.AppUser;
 import com.ipunkz.neighbours.user.AppUserService;
@@ -19,12 +20,14 @@ public class MainController {
   private AppUserService appUserService;
   private ProductService productService;
   private UploadHandler uploadHandler;
+  private TimeService timeService;
 
   @Autowired
-  public MainController(AppUserService appUserService, ProductService productService, UploadHandler uploadHandler) {
+  public MainController(AppUserService appUserService, ProductService productService, UploadHandler uploadHandler, TimeService timeService) {
     this.appUserService = appUserService;
     this.productService = productService;
     this.uploadHandler = uploadHandler;
+    this.timeService = timeService;
   }
 
   @GetMapping("/")
@@ -88,6 +91,13 @@ public class MainController {
   public String makeBid(@RequestParam (value = "bid") String bid,
                         @RequestParam (value = "userId") Long userId,
                         @PathVariable (value = "productId") Long productId, Model model) {
+    Product product = productService.findById(productId);
+    if (timeService.expiredOrNOt(product.getFinishedAt()) > 0){
+      product.setExpired(true);
+      productService.saveProduct(product);
+      model.addAttribute("product", product);
+      return "product";
+    }
     try {
       AppUser user = appUserService.findById(userId);
       productService.auction(productId,user,bid);
