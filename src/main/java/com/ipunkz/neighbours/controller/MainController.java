@@ -76,6 +76,29 @@ public class MainController {
     return "auction";
   }
 
+  @GetMapping("/product/{productId}")
+  public String detailsOfProduct(@PathVariable (value = "productId") Long productId,
+                                 @RequestParam (value = "userId") Long userId, Model model) {
+    model.addAttribute("userId", userId);
+    model.addAttribute("product", productService.findById(productId));
+    return "product";
+  }
+
+  @PostMapping("/product/{productId}")
+  public String makeBid(@RequestParam (value = "bid") String bid,
+                        @RequestParam (value = "userId") Long userId,
+                        @PathVariable (value = "productId") Long productId, Model model) {
+    try {
+      AppUser user = appUserService.findById(userId);
+      productService.auction(productId,user,bid);
+    } catch (Exception e) {
+      model.addAttribute("error",e.getMessage());
+    }
+    model.addAttribute("userId", userId);
+    model.addAttribute("product", productService.findById(productId));
+    return "product";
+  }
+
   @PostMapping("/addProduct")
   public String addNewProduct(@RequestParam("name") String name, @RequestParam("long") String lDesc,
                               @RequestParam("short") String sDesc, @RequestParam("price") int price,

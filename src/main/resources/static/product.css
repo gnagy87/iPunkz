@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("pics/szoba.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+nav.navbar {
+    background-color: #a61210;
+    color: white;
+    font-size: 30px;
+    font-family: "Arial Black";
+    text-shadow: 3px 3px black;
+}
+
+div.user {
+    position: center;
+    margin: auto;
+    height: 220px;
+    width: 300px;
+    margin-top: 50px;
+}
+
+.picture {
+    position: center;
+    margin: auto;
+    height: 220px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.bid {
+    position: center;
+    margin: auto;
+    margin-top: 40px;
+    height: 220px;
+    width: 300px;
+}
+.list {
+    color: white;
+    font-size: 30px;
+    font-family: "Arial Black";
+    text-shadow: 3px 3px black;
+    margin-left: 30px;
+}
+
+a.btn-primary {
+    margin-left: 35px;
+}
+
+p {
+    position: center;
+    margin: auto;
+}

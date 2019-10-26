@@ -43,4 +43,20 @@ public class ProductServiceImpl implements ProductService{
     product.setUser(user);
     productRepository.save(product);
   }
+
+  @Override
+  public Product findById(Long productId) {
+    return productRepository.findById(productId).get();
+  }
+
+  @Override
+  public void auction(Long productId, AppUser user, String bid) throws Exception {
+    Product product = productRepository.findById(productId).get();
+    if (bid == null || bid.equals("") || Integer.parseInt(bid) < product.getPrice() + product.getBidLimit()) {
+      throw new Exception("Not enough money");
+    }
+      product.setOwner(user.getNickname());
+      product.setPrice(Integer.parseInt(bid));
+      productRepository.save(product);
+  }
 }
