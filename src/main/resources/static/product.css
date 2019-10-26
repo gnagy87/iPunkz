@@ -1,8 +1,10 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url("pics/szoba.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+    background: url("pics/szoba.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 nav.navbar {
@@ -14,8 +16,7 @@ nav.navbar {
 }
 
 div.user {
-    position: center;
-    margin: auto;
+    margin-left: 1000px;
     height: 220px;
     width: 300px;
     margin-top: 50px;
@@ -23,25 +24,29 @@ div.user {
 
 .picture {
     position: center;
-    margin: auto;
+    margin: 30px;
     height: 220px;
     width: 300px;
     border-radius: 10px;
+    float: right;
 }
 
 .bid {
     position: center;
-    margin: auto;
+    margin-left: 800px;
     margin-top: 40px;
     height: 220px;
     width: 300px;
+    float: right;
 }
+
 .list {
+    margin: 30px;
     color: white;
     font-size: 30px;
     font-family: "Arial Black";
     text-shadow: 3px 3px black;
-    margin-left: 30px;
+    float: left;
 }
 
 a.btn-primary {
