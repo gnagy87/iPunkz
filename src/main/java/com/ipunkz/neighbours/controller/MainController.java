@@ -27,6 +27,23 @@ public class MainController {
     this.appUserService = appUserService;
     this.productService = productService;
     this.uploadHandler = uploadHandler;
+    AppUser admin = new AppUser("admin","12345");
+    appUserService.saveAppUser(admin);
+    Product product = new Product("vágási feri","feriferiferi","take him tonite",10000,500,60,"vagasi.jpg");
+    product.setUser(admin);
+    Product product1 = new Product("janka néni", "jankanénijankanénijankanéni", "get drunk with her", 5000,500,60,"janka.jpg");
+    product1.setUser(admin);
+    Product product2 = new Product("taki bácsi", "takibátakibátakibá","take a ride with him", 7000,500,60,"taki.jpg");
+    product2.setUser(admin);
+    Product product3 = new Product("etus", "etusetusetusetus", "gossip with her", 6500, 500,60,"etus.jpg");
+    product3.setUser(admin);
+    Product product4 = new Product("sümeghy", "sümeghysümeghy", "sing with him", 7500, 500,60,"sumeghy.jpg");
+    product4.setUser(admin);
+    productService.saveProduct(product);
+    productService.saveProduct(product1);
+    productService.saveProduct(product2);
+    productService.saveProduct(product3);
+    productService.saveProduct(product4);
   }
 
   @GetMapping("/")
@@ -40,7 +57,9 @@ public class MainController {
                          @RequestParam (name = "password2") String password2, Model model){
     try {
       AppUser user = appUserService.register(nickname,password,password2);
-      return "redirect:/main/?id=" + user.getId();
+      model.addAttribute("user", user);
+      model.addAttribute("userId",user.getId());
+      return "home";
     } catch (Exception e) {
       model.addAttribute("error",e.getMessage());
       return "index";
