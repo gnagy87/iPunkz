@@ -37,7 +37,9 @@ public class MainController {
                          @RequestParam (name = "password2") String password2, Model model){
     try {
       AppUser user = appUserService.register(nickname,password,password2);
-      return "redirect:/main/?id=" + user.getId();
+      model.addAttribute("user", user);
+      model.addAttribute("userId",user.getId());
+      return "home";
     } catch (Exception e) {
       model.addAttribute("error",e.getMessage());
       return "index";
