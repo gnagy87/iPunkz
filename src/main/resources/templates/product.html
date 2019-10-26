@@ -9,11 +9,12 @@
 <body>
 <nav class="navbar">
     <a class="navbar-brand">Neighbours auction</a>
-    <a class="navbar-brand" th:href="'/main/?id=' + ${userId}" style="color: white">Profile</a>
+    <a class="navbar-brand" th:href="'/main/' + ${userId}" style="color: white">Profile</a>
     <a class="navbar-brand" href="" style="color: white">My products</a>
     <a class="navbar-brand" href="" style="color:white">Shopping cart</a>
     <a class="navbar-brand" href="/" style="color:white">Logout</a>
-    <form class="form-inline" th:action="'/auction/' + ${userId}" method="get">
+    <form class="form-inline" th:action="'/auction'" method="get">
+        <input type="hidden" th:value="${userId}">
         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
@@ -23,16 +24,18 @@
     <img class="picture" th:src="'/pics/' + ${product.getPicturesName()}">
 </div>
 
-<form class="bid" th:action="'/product/' + ${product.getId()} + '/?userId=' + ${userId}" method="post">
+<form class="bid" th:action="'/product/' + ${product.getId()}" method="post">
     <div class="form-group">
         <input type="number" name="bid" class="form-control" id="exampleInputEmail1" placeholder="Make your bid">
+        <input type="hidden" th:value="${userId}">
     </div>
     <button type="submit" style="background-color: #a61210" class="btn btn-primary">Submit</button>
     <p style="color: #a61210" th:text="${error}"></p>
 </form>
 
 <div class="list">
-    <ul th:value="${product}">
+    <span th:if="${product.isExpired() == true}">Auction is over</span>
+    <ul th:unless="${product.isExpired() == true}" th:value="${product}">
         <li th:text="'Name: ' + ${product.getName()}"></li>
         <li th:text="'Short description: ' + ${product.getShortDescription()}"></li>
         <li th:text="'Long description: ' + ${product.getLongDescription()}"></li>
